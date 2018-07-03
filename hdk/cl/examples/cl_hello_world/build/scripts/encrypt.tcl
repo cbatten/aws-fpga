@@ -30,6 +30,11 @@ exec rm -f $TARGET_DIR/*
 #---- Developr would replace this section with design files ----
 
 ## Change file names and paths below to reflect your CL area.  DO NOT include AWS RTL files.
+file copy -force $CL_DIR/design/regs.sv                               $TARGET_DIR
+file copy -force $CL_DIR/design/muxes.sv                              $TARGET_DIR
+file copy -force $CL_DIR/design/regfiles.sv                           $TARGET_DIR
+file copy -force $CL_DIR/design/queues.sv                             $TARGET_DIR
+file copy -force $CL_DIR/design/HelloWorldCore.sv                     $TARGET_DIR
 file copy -force $CL_DIR/design/cl_hello_world_defines.vh             $TARGET_DIR
 file copy -force $CL_DIR/design/cl_id_defines.vh                      $TARGET_DIR
 file copy -force $CL_DIR/design/cl_hello_world.sv                     $TARGET_DIR 

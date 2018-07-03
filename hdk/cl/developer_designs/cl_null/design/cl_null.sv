@@ -1,20 +1,18 @@
 //========================================================================
-// cl_hello_world_new.sv
+// cl_null
 //========================================================================
-// Cleaned up version of the hello world provided in the Amazon FPGA HDK.
 
-module cl_hello_world
+`include "NullAXILite.v"
+
+module cl_null
 (
   // The ports are all included here:
   // hdk/common/shell_v071417d3/design/interfaces/cl_ports.vh
   `include "cl_ports.vh"
 );
 
-  `include "cl_common_defines.vh"      // CL Defines for all examples
-  `include "cl_id_defines.vh"          // Defines for ID0 and ID1 (PCI ID's)
-
-  // I guess I would change this?
-  `include "cl_hello_world_defines.vh" // CL Defines for cl_hello_world
+  `include "cl_id_defines.vh"    // Defines for ID0 and ID1 (PCI ID's)
+  `include "cl_null_defines.vh"
 
   logic rst_main_n_sync;
 
@@ -41,15 +39,13 @@ module cl_hello_world
 
   logic        arvalid_q;
   logic [31:0] araddr_q;
-  logic [31:0] hello_world_q_byte_swapped;
   logic [15:0] vled_q;
   logic [15:0] pre_cl_sh_status_vled;
   logic [15:0] sh_cl_status_vdip_q;
   logic [15:0] sh_cl_status_vdip_q2;
-  logic [31:0] hello_world_q;
 
   //----------------------------------------------------------------------
-  // ID Values (cl_hello_world_defines.vh)
+  // ID Values
   //----------------------------------------------------------------------
 
   assign cl_sh_id0[31:0] = `CL_SH_ID0;
@@ -151,9 +147,6 @@ module cl_hello_world
   //----------------------------------------------------------------------
   // Only supports single-beat accesses.
 
-  // I think this is the basic I/O interface used for hello world. It is
-  // an AXI-Lite interface. -cbatten
-
   // Write Address Channel (host -> FPGA)
 
   logic        awvalid;
@@ -239,7 +232,7 @@ module cl_hello_world
   // Instantiate core
   //----------------------------------------------------------------------
 
-  HelloWorldCore core
+  NullAXILite core
   (
     .clk     (clk_main_a0),
     .reset   (~rst_main_n_sync),
